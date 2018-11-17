@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ListMovies from './ListMovies'
+import MovieCardsList from './MovieCardsList'
 
 const profiles = [
   {
@@ -92,27 +92,6 @@ const movies = {
   },
 };
 
-/**
- * Recupera a lista dos fãs do filme
- * @param {integer} movieId - identificador do filme
- */
-const getFanMovieList = (movieId) => profiles.filter(profile => parseInt(profile.favoriteMovieID, 10) === movieId).map(profile => ({
-  id:`${users[parseInt(profile.userID, 10)].userName}-${profile.userID}`,
-  name : users[parseInt(profile.userID, 10)].name,
-}));
-
-/**
- * Recupera uma lista de todos os filmes
- */
-const getMovies = () => Object.keys(movies).map(key => 
-    ({
-      id: movies[key].id,
-      name: movies[key].name,
-      users: getFanMovieList(movies[key].id)
-    })
-);
-
-
 class App extends Component {
   render() {
     return (
@@ -121,8 +100,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>       
-        <h2>Movies</h2>
-        <ListMovies movies={getMovies()}/>
+        <h1>How Popular is Your Favorite Movie?</h1>
+        <MovieCardsList profiles={profiles} movies={movies} users={users}/>
         <footer className="App-footer">Milsonei dos Santos Cardoso - 15/11/2018</footer>
       </div>
     );
@@ -130,3 +109,4 @@ class App extends Component {
 }
 
 export default App;
+
